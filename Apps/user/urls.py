@@ -2,8 +2,10 @@
 from .routers import * #verificar acción
 from django.urls import path, include
 from .viewSets import UserViewSet
+from .views import getUserById
 
 # Create your urls here.
 urlpatterns = [
-    path('',include(router.urls))
+    path('',include(router.urls)),
+    path('getUserById/',getUserById),
 ]
