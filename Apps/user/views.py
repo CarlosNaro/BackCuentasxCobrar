@@ -1,10 +1,9 @@
 from .serializer import MyTokenObtainPairSerializer
-from django.shortcuts import render
-from rest_framework import generics, status
-from rest_framework.decorators import api_view
+from rest_framework import  status
 from rest_framework.response import Response
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
 from .models import User
 from .serializer import UserSerializer
 
@@ -12,10 +11,10 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 @api_view(['POST'])
-def getUserById(request):
+@permission_classes([IsAuthenticated])
+def getUserByID(request):
     try:
-        user = User.objects.get(id=request.data['id'])
-        print("user",user)
+        user = User.objects.get(id=request.user.id)
         serializer = UserSerializer(user, many=False)
         return Response(serializer.data)
     except:
