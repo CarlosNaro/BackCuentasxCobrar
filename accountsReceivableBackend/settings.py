@@ -160,6 +160,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Variables y asignaciones propias
 # :::::::::::: manejo de imagen ::::::::::::
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media") 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # :::::::::::: Modelo user Personalizado a usar 
 AUTH_USER_MODEL = 'user.User'
