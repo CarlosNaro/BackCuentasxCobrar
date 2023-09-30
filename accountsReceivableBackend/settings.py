@@ -46,7 +46,10 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
-CORS_ORIGIN_ALLOW_ALL = True #corsheaders para la comunicación con el front-end
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
 # :::::::::
 
 # Application definition
@@ -67,9 +70,11 @@ INSTALLED_APPS = [
 
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True #corsheaders para la comunicación con el front-end
+
 MIDDLEWARE = [
     # :::::::::: importación manual 
-    "corsheaders.middleware.CorsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     # ::::::::::
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -159,7 +164,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Variables y asignaciones propias
 # :::::::::::: manejo de imagen ::::::::::::
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # :::::::::::: Modelo user Personalizado a usar 
 # AUTH_USER_MODEL = 'user.User'

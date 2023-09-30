@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from .models import Profile
 from django.contrib.auth.models import User
-from .serializer import UserSerializer
+from .serializer import ProfileSerializer
 
 # Create your views here.
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -19,7 +19,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 def getUserByID(request):
     try:
         user = Profile.objects.get(id=request.user.id)
-        serializer = UserSerializer(user)
+        serializer = ProfileSerializer(user)
         return Response(serializer.data)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)

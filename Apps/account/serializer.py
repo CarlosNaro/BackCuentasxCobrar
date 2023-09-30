@@ -8,18 +8,23 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 # create your Serializer here
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
+        model = User
+        fields = ["id", "username"]
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
         model = Profile
-        fields = '__all__'
+        fields = "__all__"
+
 
 class UserLoginSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Profile
+        model = User
         fields = [
             'id',
-            'first_name',
-            'is_admin',
+            'username',
+            'is_staff',
         ]
-
 
 #  personalización de la respuesta del token con el usuario logueado
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

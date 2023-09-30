@@ -1,7 +1,7 @@
 # cuarto paso para la creación de un api user
 from .routers import * #verificar acción
 from django.urls import path, include
-from .viewSets import UserViewSet
+from .viewSets import ProfileViewSet
 from .views import getUserByID
 
 # Create your urls here.
