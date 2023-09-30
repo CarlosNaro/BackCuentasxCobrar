@@ -60,7 +60,7 @@ INSTALLED_APPS = [
 
     # importaciones manuales
     'corsheaders',
-    'Apps.user',
+    'Apps.account',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
@@ -162,4 +162,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # :::::::::::: Modelo user Personalizado a usar 
-AUTH_USER_MODEL = 'user.User'
+# AUTH_USER_MODEL = 'user.User'
