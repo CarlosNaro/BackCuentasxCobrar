@@ -1,6 +1,6 @@
 # segundo paso para la creación de un api user
 from .models import Profile
-from .serializer import ProfileSerializer, UserSerializer
+from .serializer import ProfileSerializer, UserDjangoSerializer
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth.models import User
 
@@ -11,4 +11,4 @@ class ProfileViewSet(ModelViewSet):
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserDjangoSerializer
