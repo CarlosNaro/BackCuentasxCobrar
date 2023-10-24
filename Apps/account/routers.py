@@ -7,4 +7,4 @@ from .viewSets import ProfileViewSet , UserViewSet
 
 router = DefaultRouter()
 router.register('profile',ProfileViewSet)
-router.register('user',UserViewSet)
+router.register('django',UserViewSet)

@@ -6,16 +6,24 @@ from .models import Profile
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 # create your Serializer here
-class UserDjangoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ["id", "username"]
-
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = "__all__"
 
+
+class UserDjangoSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer()
+    class Meta:
+        model = User
+        fields = "__all__"
+    
+    def to_representation(self, instance):
+        return {
+            'id':instance.id,
+            'is_staff':instance.profile.is_admin,
+            'username':instance.username,
+        }
 
 class UserLoginSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
@@ -26,7 +34,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
         return {
             'id':instance.id,
             'username':instance.username,
-            'is_admin':instance.profile.is_admin,
+            'is_staff':instance.profile.is_admin,
         }
 
 #  personalización de la respuesta del token con el usuario logueado
