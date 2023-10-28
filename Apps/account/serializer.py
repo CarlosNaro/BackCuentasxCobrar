@@ -25,19 +25,19 @@ class UserDjangoSerializer(serializers.ModelSerializer):
             'username':instance.username,
         }
 
-class UserLoginSerializer(serializers.ModelSerializer):
+class LoginUserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     class Meta:
         model = User
-        fields = "__all__"
+        fields = ["id" ,"username", "is_staff"]
     def to_representation(self, instance):
         return {
             'id':instance.id,
             'username':instance.username,
-            'is_staff':instance.profile.is_admin,
+            'is_staff':instance.is_staff,
         }
 
-#  personalización de la respuesta del token con el usuario logueado
+#Customizing the token response 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -45,5 +45,5 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             'refresh': data.pop('refresh'), 
             'access': data.pop('access')
             }
-        data['user'] = UserLoginSerializer(self.user).data
-        return data
+        data['user'] = LoginUserSerializer(self.user).data
+        return data   
