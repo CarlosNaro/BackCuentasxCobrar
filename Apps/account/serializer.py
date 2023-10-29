@@ -13,29 +13,10 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class UserDjangoSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer()
-    class Meta:
-        model = User
-        fields = "__all__"
-    
-    def to_representation(self, instance):
-        return {
-            'id':instance.id,
-            'is_staff':instance.profile.is_admin,
-            'username':instance.username,
-        }
-
-class LoginUserSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer()
     class Meta:
         model = User
         fields = ["id" ,"username", "is_staff"]
-    def to_representation(self, instance):
-        return {
-            'id':instance.id,
-            'username':instance.username,
-            'is_staff':instance.is_staff,
-        }
+
 
 #Customizing the token response 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -45,5 +26,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             'refresh': data.pop('refresh'), 
             'access': data.pop('access')
             }
-        data['user'] = LoginUserSerializer(self.user).data
-        return data   
+        data['user_django'] = UserDjangoSerializer(self.user).data
+        return data  
+
+    # def to_representation(self, instance):
+    #     return {
+    #         'id':instance.id,
+    #         'username':instance.username,
+    #         'is_staff':instance.is_staff,
+    #     }

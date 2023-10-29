@@ -20,9 +20,8 @@ def getUserByID(request):
     try:
         profile = Profile.objects.get(id=request.user.id)
         user  = User.objects.get(id=request.user.id)
-        serializer = ProfileSerializer(profile)
-        serializer2 = UserDjangoSerializer(user)
-        return Response({'profile':serializer.data,'user':serializer2.data})
-     
+        profile_serializer = ProfileSerializer(profile)
+        user_serializer = UserDjangoSerializer(user)
+        return Response({'profile':profile_serializer.data,'user_django':user_serializer.data})
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
